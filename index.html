@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Katch - Video Downloader</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <nav class = "navbar">
+
+        <div class="logo">KATCH</div>
+         <div class="nav-links">   
+         <a href="#">How it works</a>
+         <a href="#">Supported Platforms</a></div>
+    </nav>
+        <h4>Powered by <b>Austin Tech🌆</b></h4>
+        
+
+
+
+<main class="hero">
+        <div class="container">
+            <h1>Catch any video, <span class="gradient-text">instantly.</span></h1>
+            <p>The simplest way to download from your favorite social platforms.</p>
+            
+            <div class="input-group">
+                <input type="text" placeholder="Paste your link here (Instagram, TikTok, etc.)">
+                <button class="btn-main">Catch it</button>
+               <!-- <br> <br><button class="btn-clear">clear</button>--->
+            </div>
+<div id="preview-container" style="display: none; margin-top: 20px; text-align: center;">
+    <h3 id="video-title"></h3>
+    <img id="video-thumb" src="" style="width: 100%; max-width: 300px; border-radius: 10px;">
+    <br>
+    <video id="video-player" controls style="width: 100%; max-width: 300px; margin-top: 10px;"></video>
+</div>
+<main class="hero">
+
+        <div id="preview-container" style="display: none; margin-top: 20px;">
+            <h3 id="video-title" style="color: white;"></h3>
+            <img id="video-thumb" src="" style="width: 100%; border-radius: 10px; margin: 10px 0;">
+            <video id="video-player" controls style="width: 100%; display: none;"></video>
+            <button id="confirmDownload" class="btn-main" style="background: green;">Confirm Download</button>
+        </div>
+    </div>
+</main>
+
+            <div class="trust-badges">
+                <span>✓ High Quality</span>
+                <span>✓ Fast Servers</span>
+                <span>✓ Free Forever</span>
+            </div>
+        </div>
+    </main>
+
+
+     <footer>
+         <!-- Font Awesome for Icon -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+<!-- WhatsApp Link -->
+<a href="https://whatsapp.com/channel/0029VbA3OObAu3aUgHhAwa3B" class="whatsapp-float" target="_blank">
+    <i class="fa fa-whatsapp whatsapp-icon"></i>
+</a>
+
+             <h5>&copy; 2026 Katch Downloaer</h5>
+     </footer>
+ 
+<!-- <script>
+    const catchBtn = document.querySelector('.btn-main');
+const urlInput = document.querySelector('input');
+
+catchBtn.addEventListener('click', async function() {
+    const url = urlInput.value.trim();
+
+    // Check if the input is empty
+    if (url === "") {
+        alert("Please paste a link first!");
+        return;
+    }
+
+    // 1. UI Animation: Start "Catching"
+    const originalText = catchBtn.innerHTML;
+    catchBtn.innerHTML = 'Catching...';
+    catchBtn.disabled = true; // Prevent double clicking
+
+    try {
+        // 2. THE BRIDGE: Talking to Pydroid 3
+        const response = await fetch('http://127.0.0.1:5000/download', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: url }) 
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            catchBtn.innerHTML = "Success!";
+            alert("Video saved to Downloads folder!");
+        } else {
+            catchBtn.innerHTML = "Failed";
+            alert("Backend Error: " + result.message);
+        }
+
+    } catch (error) {
+        console.error("Connection error:", error);
+        alert("Could not reach Pydroid. Is the server running?");
+        catchBtn.innerHTML = "Error";
+    } finally {
+        // 3. Reset UI
+        setTimeout(() => {
+            catchBtn.innerHTML = originalText;
+            catchBtn.disabled = false;
+            urlInput.value = ""; 
+        }, 3000);
+    }
+});
+
+</script>-->
+<script src = "main.js"></script>
+</body>
+</html>
