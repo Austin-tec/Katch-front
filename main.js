@@ -1,12 +1,12 @@
-// Select UI elements
-const catchBtn = document.querySelector('.btn-main');
-const urlInput = document.querySelector('input');
+// 1. SELECT UI ELEMENTS
+const catchBtn = document.getElementById('catch-btn');
+const urlInput = document.getElementById('video-url-input');
 const previewContainer = document.getElementById('preview-container');
 
-// YOUR LIVE RAILWAY BACKEND URL
+// 2. YOUR LIVE BACKEND URL (RAILWAY)
 const BASE_URL = 'https://web-production-bdb55.up.railway.app';
 
-// 1. PRIMARY ACTION: Get Preview
+// 3. GET PREVIEW LOGIC
 catchBtn.addEventListener('click', async () => {
     const url = urlInput.value.trim();
 
@@ -15,9 +15,9 @@ catchBtn.addEventListener('click', async () => {
         return;
     }
 
-    // Update button state
+    // UI Feedback
     const originalText = catchBtn.innerHTML;
-    catchBtn.innerHTML = 'Catching...';
+    catchBtn.innerHTML = '<span class="spinner"></span> Catching...';
     catchBtn.disabled = true;
 
     try {
@@ -31,17 +31,17 @@ catchBtn.addEventListener('click', async () => {
         const data = await response.json();
 
         if (response.ok) {
-            // Show preview area
+            // Show preview card
             previewContainer.style.display = 'block';
             document.getElementById('video-title').innerText = data.title;
             document.getElementById('video-thumb').src = data.thumbnail;
             
-            // Setup the Video Player
+            // Setup Video Player
             const player = document.getElementById('video-player');
             player.src = data.video_url;
             player.style.display = 'block';
 
-            // Configure the "Confirm" button
+            // Connect the "Download Now" button
             const confirmBtn = document.getElementById('confirmDownload');
             confirmBtn.onclick = () => executeDownload(url);
 
@@ -51,7 +51,7 @@ catchBtn.addEventListener('click', async () => {
         }
     } catch (error) {
         console.error("Fetch error:", error);
-        alert("Connection Failed. The server might be starting up—please try again in 10 seconds.");
+        alert("Connection Failed. The server might be waking up—please try again in 10 seconds.");
         catchBtn.innerHTML = "Try Again";
     } finally {
         catchBtn.disabled = false;
@@ -59,12 +59,12 @@ catchBtn.addEventListener('click', async () => {
     }
 });
 
-// 2. SECONDARY ACTION: Execute Cloud Download
+// 4. ACTUAL DOWNLOAD LOGIC (BLOB METHOD)
 async function executeDownload(url) {
     const confirmBtn = document.getElementById('confirmDownload');
     const originalBtnText = confirmBtn.innerText;
     
-    confirmBtn.innerText = "Downloading to browser...";
+    confirmBtn.innerText = "Downloading...";
     confirmBtn.disabled = true;
 
     try {
@@ -75,30 +75,30 @@ async function executeDownload(url) {
         });
 
         if (response.ok) {
-            // This part is crucial for Cloud hosting:
-            // We receive the file as a 'blob' (binary data)
+            // Receive file as a 'blob' (binary data)
             const blob = await response.blob();
             const downloadUrl = window.URL.createObjectURL(blob);
             
             // Create a temporary link to trigger the save dialog
             const a = document.createElement('a');
+            a.style.display = 'none';
             a.href = downloadUrl;
             a.download = "katch_video.mp4"; 
             document.body.appendChild(a);
             a.click();
+            
+            // Clean up
+            window.URL.revokeObjectURL(downloadUrl);
             a.remove();
 
-            confirmBtn.style.background = "green";
-            confirmBtn.innerText = "Download Started!";
-            urlInput.value = ""; 
+            confirmBtn.style.background = "#10b981"; // Success Green
+            confirmBtn.innerText = "Saved!";
         } else {
             const errorData = await response.json();
             alert("Download Error: " + errorData.error);
-            confirmBtn.innerText = "Retry Download";
         }
     } catch (error) {
         alert("Lost connection to the server!");
-        confirmBtn.innerText = "Error";
     } finally {
         confirmBtn.disabled = false;
         setTimeout(() => { 

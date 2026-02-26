@@ -2,15 +2,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif; /* A clean, modern font */
+    font-family: 'Inter', sans-serif;
 }
 
 body {
     background-color: #f8fafc;
     color: #1e293b;
+    line-height: 1.6;
 }
 
-/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -21,13 +21,17 @@ body {
 .logo {
     font-weight: 800;
     font-size: 1.5rem;
-    letter-spacing: -1px;
     color: #2563eb;
 }
 
-/* Hero Section */
+.brand-tag {
+    text-align: center;
+    padding: 10px;
+    color: #2563eb;
+}
+
 .hero {
-    padding: 100px 10%;
+    padding: 60px 5%;
     text-align: center;
 }
 
@@ -37,37 +41,38 @@ h1 {
     margin-bottom: 20px;
 }
 
-h5 {
-    padding-top: 200px;
-    font-weight: 800;
-    margin-bottom: 20px;
-}
 .gradient-text {
     background: linear-gradient(90deg, #2563eb, #7c3aed);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-p { padding-left: 25px;
-    font-size: 1.2rem;
-    color: #64748b;
-    margin-bottom: 40px;
-}
-h4 { padding-left: 30px;
-    font-size: 1.5rem;
-    color: #2563eb;
-    margin-bottom: 40px;
-}
-
-/* Input Group */
+/* Input Group & Responsiveness */
 .input-group {
     display: flex;
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 30px;
     background: white;
     padding: 8px;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 2.2rem; }
+    .input-group {
+        flex-direction: column;
+        background: transparent;
+        box-shadow: none;
+        gap: 10px;
+    }
+    input {
+        background: white;
+        border-radius: 12px !important;
+        width: 100%;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .btn-main { width: 100%; }
 }
 
 input {
@@ -76,6 +81,7 @@ input {
     padding: 15px 20px;
     font-size: 1rem;
     outline: none;
+    border-radius: 12px;
 }
 
 .btn-main {
@@ -86,76 +92,58 @@ input {
     border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
+    transition: 0.3s;
 }
 
-.btn-clear{
-    background: #2563eb;
+/* Preview Card */
+.preview-card {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 30px auto;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    max-width: 450px;
+    animation: fadeIn 0.5s ease;
+}
+
+.media-box img, .media-box video {
+    width: 100%;
+    border-radius: 12px;
+    margin: 15px 0;
+}
+
+.btn-download {
+    background: #10b981;
     color: white;
     border: none;
-    padding: 15px 20px;
+    padding: 15px;
     border-radius: 12px;
-    font-weight: 600;
+    width: 100%;
+    font-weight: 700;
     cursor: pointer;
-    transition: transform 0.2s, background 0.2s;
+    transition: 0.3s;
 }
 
-.btn-main:hover {
-    background: #1d4ed8;
-    transform: translateY(-2px);
+.btn-download:hover { background: #059669; transform: scale(1.02); }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Trust Badges */
-.trust-badges {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    font-size: 0.9rem;
-    color: #94a3b8;
-}
-/* The loading spinner animation */
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.spinner {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-    margin-right: 10px;
-    vertical-align: middle;
-}
-
-/* A class to dim the button while loading */
-.btn-loading {
-    background: #64748b !important; /* Changes to a gray color */
-    cursor: not-allowed;
-    pointer-events: none;
-}
 .whatsapp-float {
     position: fixed;
     width: 60px;
     height: 60px;
-    bottom: 40px;
-    right: 40px;
-    background-color: #25d366;
-    color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    font-size: 30px;
-    box-shadow: 2px 2px 3px #999;
-    z-index: 100;
+    bottom: 20px;
+    right: 20px;
+    background: #25d366;
+    color: white;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 30px;
     text-decoration: none;
-}
-
-.whatsapp-float:hover {
-    background-color: #128c7e; /* Darker green on hover */
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
 }
